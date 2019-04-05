@@ -187,7 +187,8 @@ public class Yield extends AbstractProcessor {
 //                }
 //            }
         } catch ( IOException e ) {
-            ;
+            session.transfer ( flowFile, FAILURE_RELATIONSHIP );
+            throw new ProcessException(String.format("Unable to communicate with cache while updating %s due to %s", myCacheValue, e), e);
         }
     }
 
